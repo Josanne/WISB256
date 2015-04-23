@@ -1,2 +1,3 @@
 var = input('Name? ')
-print ('Hello, ' + var + '!')
+var2 = input('How many greetings? ')
+print (var2 + 'x Hello, ' + var + '!')
