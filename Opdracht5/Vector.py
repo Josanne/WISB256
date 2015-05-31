@@ -1,9 +1,7 @@
 import math
 
 class Vector():
-    vector = []
-    
-    
+    V = []
     def __init__(self,n,vector=0):
         if type(vector) == list:
             self.vector = vector
@@ -37,3 +35,27 @@ class Vector():
     
     def norm(self):
         return math.sqrt(self.inner(self))
+        
+    def proj(self,other):
+        x = self.inner(other)
+        y = self.inner(self)
+        z = float(x/y)
+        w = self.scalar(z)
+        return w
+
+def GrammSchmidt(V):
+    W = [V[0]]
+    for i in range(1,len(V)):
+        x = Vector(len(V[0].vector))
+        for j in range(i):
+            # x = som van alle proj.
+            y = V[j].proj(V[i])
+            x = x.lincomb(y,1,1)
+        w = V[i].lincomb(x,1,-1)
+        W.append(w)
+    for i in range(len(V)):
+        c = float(1/W[i].norm())
+        W[i] = W[i].scalar(c)
+    return W
+
+
