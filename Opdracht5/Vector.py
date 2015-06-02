@@ -44,12 +44,12 @@ class Vector():
         return w
 
 def GrammSchmidt(V):
-    W = [V[0]]
+    W = [V[0].scalar(1/V[0].norm())]
     for i in range(1,len(V)):
         x = Vector(len(V[0].vector))
         for j in range(i):
             # x = som van alle proj.
-            y = V[j].proj(V[i])
+            y = W[j-1].proj(V[i])
             x = x.lincomb(y,1,1)
         w = V[i].lincomb(x,1,-1)
         W.append(w)
